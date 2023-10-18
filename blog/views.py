@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from . models import Post
 
@@ -8,4 +8,10 @@ def post_list(request):
     # user = request.user.id
     # posts = Post.objects.filter(author=user)
     return render(request, 'blog/post_list.html', {'posts': posts})
+
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
+
 
